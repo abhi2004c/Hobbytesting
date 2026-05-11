@@ -1,0 +1,147 @@
+@import 'tailwindcss';
+
+/* ── Design System ── */
+:root {
+    --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+    --color-primary: #4f46e5;
+    --color-primary-light: #818cf8;
+    --radius-default: 0.75rem;
+}
+
+/* ── Base Styles ── */
+body {
+    font-family: var(--font-sans);
+}
+
+/* ── Smooth transitions ── */
+*, *::before, *::after {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+}
+
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ── Form focus rings ── */
+input:focus, select:focus, textarea:focus {
+    --tw-ring-color: var(--color-primary);
+    --tw-ring-opacity: 0.4;
+}
+
+/* ── Loading spinner ── */
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Gradient text utility ── */
+.text-gradient {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ── Card hover effect ── */
+.card-hover {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px -8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Pulse dot (notification badge) ── */
+.pulse-dot {
+    position: relative;
+}
+.pulse-dot::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 2px solid white;
+    animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+/* ── Livewire loading states ── */
+[wire\:loading] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ── Reaction pop animation ── */
+@keyframes reaction-pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.5) rotate(-10deg); }
+    70%  { transform: scale(0.9) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+.animate-reaction-pop {
+    animation: reaction-pop 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+/* ── Floating emoji particle ── */
+@keyframes emoji-float {
+    0%   { transform: translateY(0) scale(1);   opacity: 1; }
+    60%  { transform: translateY(-60px) scale(1.4); opacity: 0.9; }
+    100% { transform: translateY(-100px) scale(0.6); opacity: 0; }
+}
+.emoji-particle {
+    animation: emoji-float 0.9s ease-out forwards;
+    transform-origin: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* ── Comment slide-in ── */
+@keyframes comment-slide-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.comment-slide-in {
+    animation: comment-slide-in 0.25s ease-out both;
+}
+
+/* ── Emoji picker button hover ── */
+.emoji-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.emoji-btn:hover {
+    transform: scale(1.35) translateY(-3px);
+}
