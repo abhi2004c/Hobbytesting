@@ -47,8 +47,10 @@ class ChatWindow extends Component
             $conv,
             auth()->user(),
             SendMessageDTO::fromRequest([
+                'conversation_id' => $this->conversationId,
+                'user_id' => auth()->id(),
                 'content' => $this->newMessage,
-                'type'    => 'text',
+                'type' => 'text',
             ]),
         );
 

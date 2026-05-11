@@ -6,7 +6,7 @@ namespace App\Domain\Auth\DTOs;
 
 use App\Domain\Shared\DTOs\BaseDTO;
 
-final class RegisterDTO extends BaseDTO
+final readonly class RegisterDTO extends BaseDTO
 {
     public function __construct(
         public readonly string  $name,

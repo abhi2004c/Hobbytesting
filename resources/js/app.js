@@ -1,9 +1,6 @@
 import './bootstrap';
-import Alpine from 'alpinejs';
-import intersect from '@alpinejs/intersect';
 
-window.Alpine = Alpine;
-Alpine.plugin(intersect);
+import intersect from '@alpinejs/intersect';
 
 // ── Infinite scroll helper ──
 window.infiniteScroll = (callback) => ({
@@ -27,14 +24,18 @@ window.lightbox = (images) => ({
     next() { this.current = (this.current + 1) % this.images.length; },
 });
 
-// ── Global event bus (cross-component communication) ──
+// ── Global event bus ──
 window.bus = {
     listeners: {},
-    on(event, cb) { (this.listeners[event] = this.listeners[event] || []).push(cb); },
-    emit(event, data) { (this.listeners[event] || []).forEach(cb => cb(data)); },
+    on(event, cb) {
+        (this.listeners[event] = this.listeners[event] || []).push(cb);
+    },
+    emit(event, data) {
+        (this.listeners[event] || []).forEach(cb => cb(data));
+    },
 };
 
-// ── Laravel Echo / Reverb WebSocket setup ──
+// ── Laravel Echo / Reverb ──
 import Echo from 'laravel-echo';
 import Pusher from 'pusher-js';
 
@@ -49,5 +50,3 @@ window.Echo = new Echo({
     forceTLS: (import.meta.env.VITE_REVERB_SCHEME ?? 'https') === 'https',
     enabledTransports: ['ws', 'wss'],
 });
-
-Alpine.start();

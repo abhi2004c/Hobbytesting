@@ -14,13 +14,19 @@ class CreatePost extends Component
 {
     use WithFileUploads;
 
-    public int $groupId;
+    public ?int $groupId = null;
     public string $content = '';
     public string $type = 'text';
     public string $pollQuestion = '';
     public array $pollOptions = ['', ''];
     public bool $allowMultiple = false;
     public array $media = [];
+
+    public function mount(?int $groupId = null): void
+    {
+        $this->groupId = $groupId;
+        $this->type = 'text';
+    }
 
     public function addPollOption(): void
     {
@@ -37,30 +43,43 @@ class CreatePost extends Component
         }
     }
 
-    public function submit(PostService $service): void
+    
+
+    public function submit(): void
     {
+        $service = app(PostService::class);
+
         $this->validate([
-            'content'        => $this->type === 'poll' ? 'nullable|string|max:5000' : 'required|string|max:5000',
-            'type'           => 'required|in:' . implode(',', array_column(PostType::cases(), 'value')),
-            'pollQuestion'   => $this->type === 'poll' ? 'required|string|max:500' : 'nullable',
-            'pollOptions.*'  => $this->type === 'poll' ? 'required|string|max:200' : 'nullable',
+            'content' => $this->type === 'poll'
+                ? 'nullable|string|max:5000'
+                : 'required|string|max:5000',
+
+            'type' => 'required|in:' . implode(',', array_column(PostType::cases(), 'value')),
+
+            'pollQuestion' => $this->type === 'poll'
+                ? 'required|string|max:500'
+                : 'nullable',
+
+            'pollOptions.*' => $this->type === 'poll'
+                ? 'required|string|max:200'
+                : 'nullable',
         ]);
 
-        $user  = auth()->user();
-
-        $dto = CreatePostDTO::fromRequest([
-            'group_id'      => $this->groupId,
-            'user_id'       => $user->id,
-            'content'       => $this->content,
-            'type'          => $this->type,
-            'poll_question'  => $this->pollQuestion ?: null,
-            'poll_options'   => array_filter($this->pollOptions),
-            'poll_allow_multiple' => $this->allowMultiple,
+        $post = \App\Models\Post::create([
+            'group_id' => $this->groupId,
+            'user_id' => auth()->id(),
+            'content' => $this->content,
+            'type' => $this->type,
         ]);
 
-        $service->create($dto);
+        $this->reset([
+            'content',
+            'pollQuestion',
+            'allowMultiple',
+            'media'
+        ]);
 
-        $this->reset(['content', 'type', 'pollQuestion', 'pollOptions', 'allowMultiple', 'media']);
+        $this->type = 'text';
         $this->pollOptions = ['', ''];
 
         $this->dispatch('post-created');

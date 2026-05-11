@@ -6,7 +6,7 @@ namespace App\Domain\Messaging\DTOs;
 
 use App\Domain\Shared\DTOs\BaseDTO;
 
-final class SendMessageDTO extends BaseDTO
+final readonly class SendMessageDTO extends BaseDTO
 {
     public function __construct(
         public readonly int     $conversationId,

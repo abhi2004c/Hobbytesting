@@ -7,6 +7,7 @@ namespace App\Livewire\Feed;
 use App\Domain\Feed\Services\ReactionService;
 use App\Models\Post;
 use Livewire\Component;
+use App\Enums\ReactionType;
 
 class PostCard extends Component
 {
@@ -15,7 +16,12 @@ class PostCard extends Component
 
     public function toggleReaction(string $type, ReactionService $service): void
     {
-        $service->react($this->post, auth()->user(), $type);
+        $service->react(
+            $this->post,
+            auth()->user(),
+            ReactionType::from($type)
+        );
+
         $this->post->refresh();
     }
 

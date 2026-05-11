@@ -47,7 +47,7 @@
         <div class="p-3 border-t border-gray-200 bg-white">
             <div class="flex gap-2">
                 <input wire:model="newMessage"
-                       wire:keydown.enter="sendMessage"
+                       wire:keydown.enter.prevent="sendMessage"
                        wire:keydown.debounce.1500ms="startTyping"
                        type="text"
                        placeholder="Type a message..."

@@ -1,4 +1,4 @@
-<div class="bg-white rounded-2xl border border-gray-200/60 shadow-sm p-4" x-data="{ showPoll: @entangle('type').live === 'poll' }">
+<div class="bg-white rounded-2xl border border-gray-200/60 shadow-sm p-4" x-data>
     <div class="flex items-start gap-3">
         <img src="{{ auth()->user()->avatar_url }}" alt="" class="w-10 h-10 rounded-full object-cover ring-2 ring-white shadow-sm">
         <div class="flex-1 space-y-3">

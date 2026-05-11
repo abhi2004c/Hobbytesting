@@ -6,7 +6,7 @@ namespace App\Domain\Feed\DTOs;
 
 use App\Domain\Shared\DTOs\BaseDTO;
 
-final class CreateCommentDTO extends BaseDTO
+final readonly class CreateCommentDTO extends BaseDTO
 {
     public function __construct(
         public readonly int     $postId,

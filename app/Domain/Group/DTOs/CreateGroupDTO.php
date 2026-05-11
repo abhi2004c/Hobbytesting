@@ -7,7 +7,7 @@ namespace App\Domain\Group\DTOs;
 use App\Domain\Shared\DTOs\BaseDTO;
 use App\Enums\GroupPrivacy;
 
-final class CreateGroupDTO extends BaseDTO
+final readonly class CreateGroupDTO extends BaseDTO
 {
     public function __construct(
         public readonly string       $name,

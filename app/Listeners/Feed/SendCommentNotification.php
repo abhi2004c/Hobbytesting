@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Listeners\Feed;
 
-use App\Domain\Feed\CommentCreated;
+use App\Events\Feed\CommentCreated;
 use App\Notifications\Feed\NewCommentNotification;
 
 class SendCommentNotification
