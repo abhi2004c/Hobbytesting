@@ -16,7 +16,7 @@
         "laravel/socialite": "^5.27",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^4.3",
-        "predis/predis": "*",
+        "predis/predis": "^3.4",
         "spatie/laravel-activitylog": "^4.12",
         "spatie/laravel-medialibrary": "^11.22",
         "spatie/laravel-permission": "^7.4",
@@ -96,6 +96,14 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "platform": {
+            "ext-intl": "1.0",
+            "ext-pcntl": "1.0",
+            "ext-zip": "1.0",
+            "ext-exif": "1.0",
+            "ext-gd": "1.0",
+            "ext-bcmath": "1.0"
         }
     },
     "minimum-stability": "stable",

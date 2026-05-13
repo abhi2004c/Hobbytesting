@@ -1,0 +1,5 @@
+{
+    "php": {
+        "extensions": ["intl", "pcntl", "zip", "exif", "gd", "bcmath"]
+    }
+}
