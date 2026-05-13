@@ -3,7 +3,6 @@ nixPkgs = [
     "php83",
     "php83Extensions.pdo",
     "php83Extensions.pdo_pgsql",
-    "php83Extensions.redis",
     "php83Extensions.gd",
     "php83Extensions.mbstring",
     "php83Extensions.xml",
@@ -11,11 +10,9 @@ nixPkgs = [
     "php83Extensions.curl",
     "php83Extensions.tokenizer",
     "php83Extensions.fileinfo",
-    "php83Extensions.exif",
     "php83Extensions.bcmath",
     "php83Extensions.intl",
-    "nodejs_22",
-    "which"
+    "nodejs_22"
 ]
 
 [phases.install]
@@ -25,14 +22,5 @@ cmds = [
     "npm run build"
 ]
 
-[phases.build]
-cmds = [
-    "php artisan storage:link",
-    "php artisan config:cache",
-    "php artisan event:cache",
-    "php artisan route:cache",
-    "php artisan view:cache"
-]
-
 [start]
-cmd = "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+cmd = "php artisan storage:link --force && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
