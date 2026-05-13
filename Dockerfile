@@ -3,7 +3,7 @@ FROM php:8.3-cli-bookworm
 # System deps
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git curl unzip libpng-dev libonig-dev libxml2-dev libzip-dev \
-    libgd-dev libexif-dev libicu-dev \
+    libgd-dev libexif-dev libicu-dev libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # PHP extensions
